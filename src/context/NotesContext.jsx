@@ -1,24 +1,11 @@
 import React, { useState,useEffect,createContext } from "react";
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export const NotesContext=createContext();
 
 export const NotesProvider=({children})=>{
 
-    const[notes,setNotes]=useState(()=>{
-
-       const savedNotes= localStorage.getItem('notes');
-       if(savedNotes){
-        return JSON.parse(savedNotes);
-       }
-       else{
-        return []
-       }
-    })
-
-
-       useEffect(()=>{
-        localStorage.setItem('notes',JSON.stringify(notes));
-       },[notes]);
+    const[notes,setNotes]=useLocalStorage('notes',[]);
 
        const addNote=(newNotes)=>{
             setNotes([...notes,newNotes])

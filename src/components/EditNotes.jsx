@@ -13,17 +13,19 @@ const EditNotes=()=>{
 
     const [title,setTitle]=useState('');
     const [description,setDescription]=useState('');
+    const [date,setDate]=useState('');
 
     useEffect(()=>{
         if(notesToEdit){
             setTitle(notesToEdit.title);
             setDescription(notesToEdit.description);
+            setDate(notesToEdit.date);
         }
-    },[notesToEdit]);
+    },[id,notesToEdit]);
 
     const handleSubmit=((e)=>{
         e.preventDefault();
-        updatedItem(Number(id),{title,description});
+        updatedItem(Number(id),{title,description,date});
         navigate('/notes');
 
     })
